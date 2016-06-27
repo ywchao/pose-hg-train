@@ -22,6 +22,7 @@ function getPreds(hm)
     local max, idx = torch.max(hm:view(hm:size(1), hm:size(2), hm:size(3) * hm:size(4)), 3)
     local preds = torch.repeatTensor(idx, 1, 1, 2):float()
     preds[{{}, {}, 1}]:apply(function(x) return (x - 1) % hm:size(4) + 1 end)
+    -- bug: hm:size(3) -> hm:size(4)?
     preds[{{}, {}, 2}]:add(-1):div(hm:size(3)):floor():add(1)
     return preds
 end

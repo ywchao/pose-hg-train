@@ -8,6 +8,13 @@ torch.setnumthreads(1)
 local Dataloader = require 'dataloader'
 loader = Dataloader.create(opt)
 
+-- evaluate pretrained model
+if opt.expID == 'umich-stacked-hourglass' and opt.finalPredictions == 0 then
+    valid()
+    collectgarbage()
+    goto continue
+end
+
 isFinished = false -- Finish early if validation accuracy plateaus, can be adjusted with opt.threshold
 
 -- Main training loop
@@ -30,3 +37,5 @@ if opt.finalPredictions == 1 then predict() end
 model:clearState()
 torch.save(paths.concat(opt.save,'final_model.t7'), model)
 torch.save(paths.concat(opt.save,'optimState.t7'), optimState)
+
+::continue::

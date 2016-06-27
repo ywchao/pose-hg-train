@@ -19,7 +19,7 @@ paths.dofile('util/Logger.lua')
 torch.setdefaulttensortype('torch.FloatTensor')
 
 -- Project directory
-projectDir = paths.concat(os.getenv('HOME'),'pose-hg-train')
+projectDir = paths.dirname(paths.dirname(paths.thisfile()))
 
 -------------------------------------------------------------------------------
 -- Process command line options

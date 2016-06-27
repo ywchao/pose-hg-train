@@ -37,7 +37,12 @@ function DataLoader:__init(opt, split)
 
    local function main(idx)
       torch.setnumthreads(1)
-      if split == 'valid' then _G.isTesting = true end
+      if split == 'valid' then
+         _G.isTesting = true
+         if opt.finalPredictions == 1 then
+            return annot.valid.nsamples
+         end
+      end
       return opt[split .. 'Iters']*opt[split .. 'Batch']
    end
 
