@@ -43,7 +43,9 @@ def istrain(idx):
 def location(idx, person):
     # Return center of person, and scale factor
     example = annot['annolist'][0][0][0]['annorect'][idx]
-    if example['scale'][0][person].size > 0 and example['objpos'][0][person].size > 0:
+    if example[0][0] is not None and \
+        'scale' in example.dtype.fields and example['scale'][0][person].size > 0 and \
+        'objpos' in example.dtype.fields and example['objpos'][0][person].size > 0:
         scale = example['scale'][0][person][0][0]
         x = example['objpos'][0][person][0][0]['x'][0][0]
         y = example['objpos'][0][person][0][0]['y'][0][0]
@@ -58,7 +60,7 @@ def partinfo(idx, person, part):
         part = parts.index(part)
 
     example = annot['annolist'][0][0][0]['annorect'][idx]
-    if example['annopoints'][0][person].size > 0:
+    if 'annopoints' in example.dtype.fields and example['annopoints'][0][person].size > 0:
         parts_info = example['annopoints'][0][person][0][0][0][0]
         for i in xrange(len(parts_info)):
             if parts_info[i]['id'][0][0] == part:
@@ -90,4 +92,4 @@ def torsoangle(idx, person):
     if not (pt1[0] == 0 or pt2[0] == 0):
         return 90 + np.arctan2(pt2[1] - pt1[1], pt2[0] - pt1[0]) * 180. / np.pi
     else:
-        return 0
+        return 0.0

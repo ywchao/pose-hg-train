@@ -1,1 +1,2 @@
+addpath('common');
 addpath('tools');

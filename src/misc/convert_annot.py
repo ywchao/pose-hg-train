@@ -20,6 +20,7 @@ for idx in xrange(mpii.nimages):
             if not c[0] == -1:
                 # Adjust center/scale slightly to avoid cropping limbs
                 # (in hindsight this should have been done in the Torch code...)
+                c = [float(i) for i in c]
                 c[1] += 15 * s
                 s *= 1.25
 
@@ -27,7 +28,7 @@ for idx in xrange(mpii.nimages):
                 coords = np.zeros((16,2))
                 vis = np.zeros(16)
                 for part in xrange(16):
-                   coords[part],vis[part] = mpii.partinfo(idx,person,part)
+                    coords[part],vis[part] = mpii.partinfo(idx,person,part)
 
                 # Add info to annotation list
                 annot['index'] += [idx]
