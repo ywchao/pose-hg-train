@@ -14,7 +14,6 @@ train = zeros(num_seq,1);
 num_fr = zeros(num_seq,1);
 
 fprintf('reading annotations ... \n');
-count = 0;
 for i = 1:num_seq
     tic_print(sprintf('%04d/%04d\n',i,num_seq));
     
@@ -39,7 +38,6 @@ for i = 1:num_seq
     % num_fr(i) = num_fr(i) - sum(all(anno.visibility == 0,2));
     % 2. difficult joints, i.e. idx 4 to 13
     num_fr(i) = num_fr(i) - sum(all(anno.visibility(:,4:end) == 0,2));
-    count = count + sum(all(anno.visibility == 0,2));
 end
 fprintf('\n');
 

@@ -148,6 +148,9 @@ ref.predict = {}
 ref.predict.nsamples = annot.valid.nsamples
 ref.predict.iters = annot.valid.nsamples
 ref.predict.batchsize = 1
+if opt.dataset == 'penn_action_cropped' then
+    ref.predict.log = Logger(paths.concat(opt.save, 'test.log'), opt.continue)
+end
 
 -- Default input is assumed to be an image and output is assumed to be a heatmap
 -- This can change if an hdf5 file is used, or if opt.task specifies something different
