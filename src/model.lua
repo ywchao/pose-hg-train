@@ -9,9 +9,13 @@ if opt.continue or opt.branch ~= 'none' then
 
 -- Or a path to previously trained model is provided
 elseif opt.loadModel ~= 'none' then
-    assert(paths.filep(opt.loadModel), 'File not found: ' .. opt.loadModel)
-    print('==> Loading model from: ' .. opt.loadModel)
-    model = torch.load(opt.loadModel)
+    model_path = projectDir .. '/' .. opt.loadModel
+    assert(paths.filep(model_path), 'File not found: ' .. model_path)
+    print('==> Loading model from: ' .. model_path)
+    model = torch.load(model_path)
+
+    -- Replace the last layer if size mismatch
+    if createFTModel then model = createFTModel(model) end
 
 -- Or we're starting fresh
 else

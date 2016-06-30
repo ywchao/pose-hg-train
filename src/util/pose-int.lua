@@ -35,6 +35,6 @@ function postprocess(set, idx, output)
 end
 
 function accuracy(output,label)
-    local jntIdxs = {mpii={1,2,3,4,5,6,11,12,15,16},flic={2,3,5,6,7,8}}
+    local jntIdxs = {mpii={1,2,3,4,5,6,11,12,15,16},flic={2,3,5,6,7,8},penn_action_cropped={4,5,6,7,8,9,10,11,12,13}}
     return heatmapAccuracy(output[#output],label[#output],nil,jntIdxs[opt.dataset])
 end

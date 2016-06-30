@@ -106,7 +106,8 @@ annotLabels = {'train', 'valid'}
 annot,ref = {},{}
 for _,l in ipairs(annotLabels) do
     local a, namesFile
-    if opt.dataset == 'mpii' and l == 'valid' and opt.finalPredictions == 1 then
+    local fpds = opt.dataset == 'mpii' or opt.dataset == 'penn_action_cropped'
+    if fpds and l == 'valid' and opt.finalPredictions == 1 then
         a = hdf5.open(opt.dataDir .. '/annot/test.h5')
         namesFile = io.open(opt.dataDir .. '/annot/test_images.txt')
     else

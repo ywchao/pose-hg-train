@@ -60,3 +60,18 @@ function createModel()
     return model
 
 end
+
+function createFTModel(model)
+    -- Fine-tuning: replace the last layer if output dim is different
+    local dim_pre = model.modules[#model.modules].nOutputPlane
+    local dim_new = outputDim[1]
+    if dim_pre ~= dim_new then
+        print('==> Output size mismatch: ' .. dim_pre .. ' (pre) vs. ' .. dim_new .. ' (new)')
+        print('==> Replacing the last layer')
+        local out = nnlib.SpatialConvolution(512,dim_new,1,1,1,1,0,0)
+        model.forwardnodes[#model.forwardnodes-1].data.module = out
+        model.modules[#model.modules] = out
+    end
+
+    return model
+end

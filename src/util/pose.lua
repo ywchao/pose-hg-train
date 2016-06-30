@@ -37,6 +37,6 @@ end
 
 function accuracy(output,label)
     -- Only care about accuracy across the most difficult joints
-    local jntIdxs = {mpii={1,2,3,4,5,6,11,12,15,16},flic={2,3,5,6,7,8}}
+    local jntIdxs = {mpii={1,2,3,4,5,6,11,12,15,16},flic={2,3,5,6,7,8},penn_action_cropped={4,5,6,7,8,9,10,11,12,13}}
     return heatmapAccuracy(output,label,nil,jntIdxs[opt.dataset])
 end
