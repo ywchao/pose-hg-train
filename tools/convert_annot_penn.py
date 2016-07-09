@@ -6,8 +6,6 @@ import os
 import h5py
 import numpy as np
 
-sys.path.append('tools')
-
 def read_file_lines(file):
     lines = [line.strip() for line in open(file)]; 
     return lines
