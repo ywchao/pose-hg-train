@@ -61,23 +61,133 @@ loss = cellfun(@(x)str2double(x),C{3}(2:end));
 subplot(1,2,1); plot([1,100],[acc,acc],'b:');
 subplot(1,2,2); plot([1,100],[loss,loss],'b:');
 
+% hg-256-ft train
+log_file = './exp/penn_action_cropped/hg-256-ft/train.log';
+f = fopen(log_file);
+C = textscan(f,'%s %s %s %s');
+fclose(f);
+acc = cellfun(@(x)str2double(x),C{1}(2:end));
+loss = cellfun(@(x)str2double(x),C{3}(2:end));
+subplot(1,2,1); plot(acc,'--m');
+subplot(1,2,2); plot(loss,'--m');
+
+% hg-256-ft valid
+log_file = './exp/penn_action_cropped/hg-256-ft/valid.log';
+f = fopen(log_file);
+C = textscan(f,'%s %s %s %s');
+fclose(f);
+acc = cellfun(@(x)str2double(x),C{1}(2:end));
+loss = cellfun(@(x)str2double(x),C{3}(2:end));
+subplot(1,2,1); plot(acc,'m');
+subplot(1,2,2); plot(loss,'m');
+
+% hg-256-ft test
+log_file = './exp/penn_action_cropped/hg-256-ft-final-preds/test.log';
+f = fopen(log_file);
+C = textscan(f,'%s %s %s %s');
+fclose(f);
+acc = cellfun(@(x)str2double(x),C{1}(2:end));
+loss = cellfun(@(x)str2double(x),C{3}(2:end));
+subplot(1,2,1); plot([1,100],[acc,acc],'m:');
+subplot(1,2,2); plot([1,100],[loss,loss],'m:');
+
+% hg-512-ft train
+log_file = './exp/penn_action_cropped/hg-512-ft/train.log';
+f = fopen(log_file);
+C = textscan(f,'%s %s %s %s');
+fclose(f);
+acc = cellfun(@(x)str2double(x),C{1}(2:end));
+loss = cellfun(@(x)str2double(x),C{3}(2:end));
+subplot(1,2,1); plot(acc,'--c');
+subplot(1,2,2); plot(loss,'--c');
+
+% hg-512-ft valid
+log_file = './exp/penn_action_cropped/hg-512-ft/valid.log';
+f = fopen(log_file);
+C = textscan(f,'%s %s %s %s');
+fclose(f);
+acc = cellfun(@(x)str2double(x),C{1}(2:end));
+loss = cellfun(@(x)str2double(x),C{3}(2:end));
+subplot(1,2,1); plot(acc,'c');
+subplot(1,2,2); plot(loss,'c');
+
+% hg-512-ft test
+log_file = './exp/penn_action_cropped/hg-512-ft-final-preds/test.log';
+f = fopen(log_file);
+C = textscan(f,'%s %s %s %s');
+fclose(f);
+acc = cellfun(@(x)str2double(x),C{1}(2:end));
+loss = cellfun(@(x)str2double(x),C{3}(2:end));
+subplot(1,2,1); plot([1,100],[acc,acc],'c:');
+subplot(1,2,2); plot([1,100],[loss,loss],'c:');
+
+% hg-single-ft train
+log_file = './exp/penn_action_cropped/hg-single-ft/train.log';
+f = fopen(log_file);
+C = textscan(f,'%s %s %s %s');
+fclose(f);
+acc = cellfun(@(x)str2double(x),C{1}(2:end));
+loss = cellfun(@(x)str2double(x),C{3}(2:end));
+subplot(1,2,1); plot(acc,'--g');
+subplot(1,2,2); plot(loss,'--g');
+
+% hg-single-ft valid
+log_file = './exp/penn_action_cropped/hg-single-ft/valid.log';
+f = fopen(log_file);
+C = textscan(f,'%s %s %s %s');
+fclose(f);
+acc = cellfun(@(x)str2double(x),C{1}(2:end));
+loss = cellfun(@(x)str2double(x),C{3}(2:end));
+subplot(1,2,1); plot(acc,'g');
+subplot(1,2,2); plot(loss,'g');
+
+% hg-single-ft test
+log_file = './exp/penn_action_cropped/hg-single-ft-final-preds/test.log';
+f = fopen(log_file);
+C = textscan(f,'%s %s %s %s');
+fclose(f);
+acc = cellfun(@(x)str2double(x),C{1}(2:end));
+loss = cellfun(@(x)str2double(x),C{3}(2:end));
+subplot(1,2,1); plot([1,100],[acc,acc],'g:');
+subplot(1,2,2); plot([1,100],[loss,loss],'g:');
+
 % set legend
 subplot(1,2,1);
-legend('hg-single-no-skip scratch (train)', ...
+h_leg = legend('hg-single-no-skip scratch (train)', ...
     'hg-single-no-skip scratch (valid)', ...
     'hg-single-no-skip scratch (test)', ...
     'hg-single-no-skip fine-tune (train)', ...
     'hg-single-no-skip fine-tune (valid)', ...
     'hg-single-no-skip fine-tune (test)', ...
+    'hg-256 fine-tune (train)', ...
+    'hg-256 fine-tune (valid)', ...
+    'hg-256 fine-tune (test)', ...
+    'hg-512 fine-tune (train)', ...
+    'hg-512 fine-tune (valid)', ...
+    'hg-512 fine-tune (test)', ...
+    'hg-single fine-tune (train)', ...
+    'hg-single fine-tune (valid)', ...
+    'hg-single fine-tune (test)', ...
     'Location', 'southeast');
+set(h_leg,'FontSize',5);
 subplot(1,2,2);
-legend('hg-single-no-skip scratch (train)', ...
+h_leg = legend('hg-single-no-skip scratch (train)', ...
     'hg-single-no-skip scratch (valid)', ...
     'hg-single-no-skip scratch (test)', ...
     'hg-single-no-skip fine-tune (train)', ...
     'hg-single-no-skip fine-tune (valid)', ...
     'hg-single-no-skip fine-tune (test)', ...
+    'hg-256 fine-tune (train)', ...
+    'hg-256 fine-tune (valid)', ...
+    'hg-256 fine-tune (test)', ...
+    'hg-512 fine-tune (train)', ...
+    'hg-512 fine-tune (valid)', ...
+    'hg-512 fine-tune (test)', ...
+    'hg-single fine-tune (train)', ...
+    'hg-single fine-tune (valid)', ...
+    'hg-single fine-tune (test)', ...
     'Location', 'northeast');
+set(h_leg,'FontSize',5);
 
 % set other properties
 subplot(1,2,1);
