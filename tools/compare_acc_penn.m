@@ -151,6 +151,36 @@ loss = cellfun(@(x)str2double(x),C{3}(2:end));
 subplot(1,2,1); plot([1,100],[acc,acc],'g:');
 subplot(1,2,2); plot([1,100],[loss,loss],'g:');
 
+% hg-256-no-skip-ft train
+log_file = './exp/penn_action_cropped/hg-256-no-skip-ft/train.log';
+f = fopen(log_file);
+C = textscan(f,'%s %s %s %s');
+fclose(f);
+acc = cellfun(@(x)str2double(x),C{1}(2:end));
+loss = cellfun(@(x)str2double(x),C{3}(2:end));
+subplot(1,2,1); plot(acc,'--k');
+subplot(1,2,2); plot(loss,'--k');
+
+% hg-256-no-skip-ft valid
+log_file = './exp/penn_action_cropped/hg-256-no-skip-ft/valid.log';
+f = fopen(log_file);
+C = textscan(f,'%s %s %s %s');
+fclose(f);
+acc = cellfun(@(x)str2double(x),C{1}(2:end));
+loss = cellfun(@(x)str2double(x),C{3}(2:end));
+subplot(1,2,1); plot(acc,'k');
+subplot(1,2,2); plot(loss,'k');
+
+% hg-256-no-skip-ft test
+log_file = './exp/penn_action_cropped/hg-256-no-skip-ft-final-preds/test.log';
+f = fopen(log_file);
+C = textscan(f,'%s %s %s %s');
+fclose(f);
+acc = cellfun(@(x)str2double(x),C{1}(2:end));
+loss = cellfun(@(x)str2double(x),C{3}(2:end));
+subplot(1,2,1); plot([1,100],[acc,acc],'k:');
+subplot(1,2,2); plot([1,100],[loss,loss],'k:');
+
 % set legend
 subplot(1,2,1);
 h_leg = legend('hg-single-no-skip scratch (train)', ...
@@ -168,6 +198,9 @@ h_leg = legend('hg-single-no-skip scratch (train)', ...
     'hg-single fine-tune (train)', ...
     'hg-single fine-tune (valid)', ...
     'hg-single fine-tune (test)', ...
+    'hg-256-no-skip fine-tune (train)', ...
+    'hg-256-no-skip fine-tune (valid)', ...
+    'hg-256-no-skip fine-tune (test)', ...
     'Location', 'southeast');
 set(h_leg,'FontSize',5);
 subplot(1,2,2);
@@ -186,6 +219,9 @@ h_leg = legend('hg-single-no-skip scratch (train)', ...
     'hg-single fine-tune (train)', ...
     'hg-single fine-tune (valid)', ...
     'hg-single fine-tune (test)', ...
+    'hg-256-no-skip fine-tune (train)', ...
+    'hg-256-no-skip fine-tune (valid)', ...
+    'hg-256-no-skip fine-tune (test)', ...
     'Location', 'northeast');
 set(h_leg,'FontSize',5);
 
