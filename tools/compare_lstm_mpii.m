@@ -82,7 +82,7 @@ xlabel('epoch');
 ylabel('loss');
 
 % save to file
-save_file = 'outputs/mean_pck_lstm.pdf';
+save_file = 'output/mean_pck_lstm.pdf';
 if ~exist(save_file,'file')
     set(gcf,'PaperPosition',[0 0 8 3]);
     print(gcf,save_file,'-dpdf');

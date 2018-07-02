@@ -8,7 +8,7 @@ mode = 'pp';  % per person
 
 % set paths
 im_root = './data/mpii/images/';
-vis_root = './outputs/vis_body_joints_%s/';
+vis_root = './output/vis_body_joints_%s/';
 vis_root = sprintf(vis_root,mode);
 
 % make directories
